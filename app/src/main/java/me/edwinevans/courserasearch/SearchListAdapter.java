@@ -1,10 +1,10 @@
 package me.edwinevans.courserasearch;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -14,16 +14,30 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-class SearchListAdapter extends BaseAdapter {
+class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
     private JSONObject mResponse;
     private JSONArray mCourses;
     private JSONArray mSpecializations;
     private Map<Integer, String> mPartnerIdToName;
-    private Context context;
+    private Context mContext;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewName;
+        public TextView textViewUniversityName;
+        public TextView textViewNumCourses;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+
+            textViewName = (TextView) itemView.findViewById(R.id.name);
+            textViewUniversityName = (TextView)itemView.findViewById(R.id.university_name);
+            textViewNumCourses = (TextView) itemView.findViewById(R.id.number_of_courses);
+        }
+    }
 
     public SearchListAdapter(Context context, JSONObject response) {
         super();
-        this.context=context;
+        this.mContext = context;
         this.mResponse = response;
         try {
             JSONObject linked = response.getJSONObject("linked");
@@ -53,12 +67,16 @@ class SearchListAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return mCourses.length() + mSpecializations.length();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater)context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = inflater.inflate(R.layout.search_list_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(rowView);
+        return viewHolder;
     }
 
-    @Override
-    public Object getItem(int arg0) {
+    public JSONObject getItem(int arg0) {
         try {
             int numCourses = mCourses.length();
             if (arg0 < numCourses) {
@@ -73,56 +91,46 @@ class SearchListAdapter extends BaseAdapter {
         return null;
     }
 
-    @Override
-    public long getItemId(int arg0) {
-        return arg0;
-    }
 
     @Override
-    public boolean hasStableIds(){
-        return true;
-    }
-
-    @Override
-    public boolean isEmpty(){
-        return mCourses ==null || mCourses.length()==0;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.search_list_item, parent, false);
-        //ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView textViewName = (TextView) rowView.findViewById(R.id.name);
-        TextView textViewUniversityName = (TextView) rowView.findViewById(R.id.university_name);
-        TextView textViewNumCourses = (TextView) rowView.findViewById(R.id.number_of_courses);
+    public void onBindViewHolder(ViewHolder holder, int position) {
         try {
             JSONObject jsonObject = (JSONObject)getItem(position);
-            textViewName.setText(jsonObject.getString("name"));
-            textViewUniversityName.setVisibility(View.GONE);
+            holder.textViewName.setText(jsonObject.getString("name"));
+            holder.textViewUniversityName.setVisibility(View.GONE);
             try {
                 JSONArray partnerIds = jsonObject.optJSONArray("partnerIds");
                 if (partnerIds != null && partnerIds.length() == 1) {
                     // Assume there is only one item and it is the partner
                     Integer id = partnerIds.getInt(0);
                     String universityName = mPartnerIdToName.get(id);
-                    textViewUniversityName.setVisibility(View.VISIBLE);
-                    textViewUniversityName.setText(universityName);
+                    holder.textViewUniversityName.setVisibility(View.VISIBLE);
+                    holder.textViewUniversityName.setText(universityName);
                 }
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
             JSONArray courses = jsonObject.optJSONArray("courseIds");
-            textViewNumCourses.setVisibility(View.GONE);
+            holder.textViewNumCourses.setVisibility(View.GONE);
             if (courses != null && courses.length() > 0) {
-                textViewNumCourses.setVisibility(View.VISIBLE);
-                textViewNumCourses.setText(String.valueOf(courses.length()) + " Courses");
+                holder.textViewNumCourses.setVisibility(View.VISIBLE);
+                holder.textViewNumCourses.setText(String.valueOf(courses.length()) + " Courses");
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return rowView;
+
     }
+
+    @Override
+    public long getItemId(int arg0) {
+        return arg0;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mCourses.length() + mSpecializations.length();
+    }
+
 }

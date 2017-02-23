@@ -2,6 +2,8 @@ package me.edwinevans.courserasearch;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
@@ -60,8 +62,9 @@ public class SearchActivity extends AppCompatActivity {
 
                 final SearchListAdapter adapter = new SearchListAdapter(
                         getApplicationContext(), response);
-                ListView lv = (ListView)findViewById(R.id.search_list);
-                lv.setAdapter(adapter);
+                RecyclerView recycleView = (RecyclerView)findViewById(R.id.search_list);
+                recycleView.setAdapter(adapter);
+                recycleView.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
             }
 
             @Override
