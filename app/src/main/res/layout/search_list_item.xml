@@ -3,13 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:layout_marginLeft="8sp"
-    android:layout_marginRight="8sp"
-    android:layout_marginTop="12sp"
-    android:layout_marginBottom="12sp"
+    android:paddingLeft="8sp"
+    android:paddingRight="8sp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
     >
 
-    <!-- image -->
+    <ImageView android:id="@+id/logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
     <TextView android:id="@+id/name"
         android:text="TextView"

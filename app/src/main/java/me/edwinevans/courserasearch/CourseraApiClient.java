@@ -26,7 +26,7 @@ public class CourseraApiClient {
                                   int start, int limit,
                                   final JsonHttpResponseHandler responseHandler) {
         if (Utility.isMockMode()) {
-            String str = context.getString(R.string.mock_query_response2);
+            String str = context.getString(R.string.mock_query_response);
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(str);

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -46,33 +47,15 @@ public class SearchActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.search_list);
         mRecyclerView.addOnScrollListener(mScrollListener);
 
-        // TODO, remove!
-        View testButton = findViewById(R.id.test_search);
-        testButton.setOnClickListener(new View.OnClickListener() {
+        View searchButton = findViewById(R.id.search_button);
+        final TextView searchEntry = (TextView) findViewById(R.id.search_entry);
+        searchEntry.setText("machine learning"); // TESTING
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSearchString = "machine learning";
-                searchRequest(0);
-            }
-        });
-
-        SearchView searchView = (SearchView)findViewById(R.id.search_view);
-        searchView.setQueryHint(getString(R.string.search_catalog));
-        searchView.setQuery("machine learning", false); // TESTING
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                mSearchString = query;
+                mSearchString = searchEntry.getText().toString();
                 mScrollListener.resetState();
                 searchRequest(0);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
             }
         });
     }
@@ -98,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 if (pagingNext == 0) {
                     final SearchListAdapter adapter = new SearchListAdapter(
-                            getApplicationContext(), response);
+                            getApplicationContext(), response, mRecyclerView);
                     mRecyclerView.setAdapter(adapter);
                     mRecyclerView.setLayoutManager(mLinearLayoutManager);
                 }
