@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,27 +21,52 @@ public class SearchActivity extends AppCompatActivity {
     // specializations may be more
     private static final int LIMIT = 10;
 
+    private EndlessRecyclerViewScrollListener mScrollListener;
+    private String mSearchString;
+    private int mPagingNext = 0;
+    private LinearLayoutManager mLinearLayoutManager;
+    private RecyclerView mRecyclerView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        mLinearLayoutManager = new LinearLayoutManager(SearchActivity.this);
+        mScrollListener = new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page);
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView = (RecyclerView)findViewById(R.id.search_list);
+        mRecyclerView.addOnScrollListener(mScrollListener);
 
         // TODO, remove!
         View testButton = findViewById(R.id.test_search);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleSearchRequested("ma");
+                mSearchString = "machine learning";
+                searchRequest(0);
             }
         });
 
         SearchView searchView = (SearchView)findViewById(R.id.search_view);
-        searchView.setQueryHint("Search Catalog");
+        searchView.setQueryHint(getString(R.string.search_catalog));
+        searchView.setQuery("machine learning", false); // TESTING
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                handleSearchRequested(query);
+                mSearchString = query;
+                mScrollListener.resetState();
+                searchRequest(0);
                 return false;
             }
 
@@ -53,18 +77,37 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void handleSearchRequested(String query) {
-        Log.d(TAG, "Search for " + query);
-        CourseraApiClient.getCourses(getApplicationContext(), query, 0, LIMIT, new JsonHttpResponseHandler() {
+    private void loadNextDataFromApi(int page) {
+        // TODO! if more data
+        Log.d(TAG, "Request more data");
+        searchRequest(mPagingNext);
+    }
+
+    private void searchRequest(final int pagingNext) {
+        Log.d(TAG, "Request a search. Search string: " + mSearchString + ", Starting from: " + pagingNext);
+        CourseraApiClient.getCourses(getApplicationContext(), mSearchString, pagingNext,
+                (pagingNext == 0 ? LIMIT : 2), // testing
+                new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(TAG, "Search mResponse: " + response);
-
-                final SearchListAdapter adapter = new SearchListAdapter(
-                        getApplicationContext(), response);
-                RecyclerView recycleView = (RecyclerView)findViewById(R.id.search_list);
-                recycleView.setAdapter(adapter);
-                recycleView.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
+                JSONObject paging = response.optJSONObject("paging");
+                if (paging != null) {
+                    mPagingNext = paging.optInt("next", mPagingNext);
+                    Log.d(TAG, "  Total: " + paging.optString("total") + ", Next: " + mPagingNext);
+                }
+                if (pagingNext == 0) {
+                    final SearchListAdapter adapter = new SearchListAdapter(
+                            getApplicationContext(), response);
+                    mRecyclerView.setAdapter(adapter);
+                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                }
+                else {
+                    final SearchListAdapter adapter = (SearchListAdapter)mRecyclerView.getAdapter();
+                    adapter.appendNewResponse(response);
+                    //mScrollListener.resetState();
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

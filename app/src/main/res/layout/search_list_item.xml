@@ -5,6 +5,8 @@
     android:background="@color/white"
     android:layout_marginLeft="8sp"
     android:layout_marginRight="8sp"
+    android:layout_marginTop="12sp"
+    android:layout_marginBottom="12sp"
     >
 
     <!-- image -->
@@ -18,7 +20,6 @@
         />
 
     <TextView android:id="@+id/university_name"
-        android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
