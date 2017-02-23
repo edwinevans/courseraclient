@@ -1,0 +1,1018 @@
+GET https://www.coursera.org/api/catalogResults.v2?q=search&query=ma&start=0&limit=3&fields=courseId,onDemandSpecializationId,mCourses.v1(name,photoUrl,partnerIds),onDemandSpecializations.v1(name,logo,courseIds,partnerIds),partners.v1(name)&amp;&includes=courseId,onDemandSpecializationId,mCourses.v1(partnerIds)
+
+(Note: Query is for "ma" instead of "machine learning" and no "partners" is returned in linked)
+
+{
+  "elements": [
+    {
+      "entries": [
+        {
+          "score": 0.54857945,
+          "resourceName": "courses.v1",
+          "id": "trgWdYiKEeWfngrMqWa91Q",
+          "courseId": "trgWdYiKEeWfngrMqWa91Q"
+        },
+        {
+          "score": 0.375712,
+          "resourceName": "courses.v1",
+          "id": "X1gEFr4LEeaqug5_d2-DwA",
+          "courseId": "X1gEFr4LEeaqug5_d2-DwA"
+        },
+        {
+          "score": 0.26453063,
+          "resourceName": "courses.v1",
+          "id": "hEMZ5zJuEeaGtRI0HQleow",
+          "courseId": "hEMZ5zJuEeaGtRI0HQleow"
+        }
+      ],
+      "id": "?limit=3&q=search&query=ma&start=0"
+    }
+  ],
+  "paging": {
+    "total": 3,
+    "facets": {
+      "display_prop_bool": {
+        "facetEntries": [
+          {
+            "count": 3,
+            "name": "true",
+            "id": "true"
+          },
+          {
+            "count": 0,
+            "name": "false",
+            "id": "false"
+          }
+        ]
+      },
+      "subdomains": {
+        "facetEntries": [
+          {
+            "count": 0,
+            "name": "Personal Development",
+            "id": "personal-development"
+          },
+          {
+            "count": 1,
+            "name": "Other Languages",
+            "id": "other-languages"
+          },
+          {
+            "count": 0,
+            "name": "Algorithms",
+            "id": "algorithms"
+          },
+          {
+            "count": 0,
+            "id": "language-and-literature"
+          },
+          {
+            "count": 0,
+            "name": "Software Development",
+            "id": "software-development"
+          },
+          {
+            "count": 0,
+            "name": "Clinical Science",
+            "id": "clinical-science"
+          },
+          {
+            "count": 1,
+            "name": "History",
+            "id": "history"
+          },
+          {
+            "count": 0,
+            "name": "Learning English",
+            "id": "learning-english"
+          },
+          {
+            "count": 1,
+            "name": "Leadership and Management",
+            "id": "leadership-and-management"
+          },
+          {
+            "count": 0,
+            "name": "Math and Logic",
+            "id": "math-and-logic"
+          },
+          {
+            "count": 0,
+            "name": "Research Methods",
+            "id": "research-methods"
+          },
+          {
+            "count": 0,
+            "name": "Electrical Engineering",
+            "id": "electrical-engineering"
+          },
+          {
+            "count": 0,
+            "name": "Philosophy",
+            "id": "philosophy"
+          },
+          {
+            "count": 0,
+            "name": "Mobile and Web Development",
+            "id": "mobile-and-web-development"
+          },
+          {
+            "count": 0,
+            "name": "Environmental Science and Sustainability",
+            "id": "environmental-science-and-sustainability"
+          },
+          {
+            "count": 0,
+            "name": "Design and Product",
+            "id": "design-and-product"
+          },
+          {
+            "count": 0,
+            "name": "Probability and Statistics",
+            "id": "probability-and-statistics"
+          },
+          {
+            "count": 0,
+            "name": "Animals and Veterinary Science",
+            "id": "animals-and-veterinary-science"
+          },
+          {
+            "count": 1,
+            "name": "Governance and Society",
+            "id": "governance-and-society"
+          },
+          {
+            "count": 0,
+            "name": "Chemistry",
+            "id": "chemistry"
+          },
+          {
+            "count": 0,
+            "name": "Computer Security and Networks",
+            "id": "computer-security-and-networks"
+          },
+          {
+            "count": 1,
+            "name": "Medicine & Healthcare",
+            "id": "medicine-and-healthcare"
+          },
+          {
+            "count": 0,
+            "name": "Biology",
+            "id": "biology"
+          },
+          {
+            "count": 0,
+            "name": "Psychology",
+            "id": "psychology"
+          },
+          {
+            "count": 0,
+            "name": "Law",
+            "id": "law"
+          },
+          {
+            "count": 0,
+            "name": "Finance",
+            "id": "finance"
+          },
+          {
+            "count": 1,
+            "name": "Education",
+            "id": "education"
+          },
+          {
+            "count": 0,
+            "name": "Marketing",
+            "id": "marketing"
+          },
+          {
+            "count": 0,
+            "name": "Business Strategy",
+            "id": "business-strategy"
+          },
+          {
+            "count": 0,
+            "name": "Entrepreneurship",
+            "id": "entrepreneurship"
+          },
+          {
+            "count": 0,
+            "name": "Data Analysis",
+            "id": "data-analysis"
+          },
+          {
+            "count": 0,
+            "name": "Mechanical Engineering",
+            "id": "mechanical-engineering"
+          },
+          {
+            "count": 0,
+            "name": "Economics",
+            "id": "economics"
+          },
+          {
+            "count": 0,
+            "name": "Machine Learning",
+            "id": "machine-learning"
+          },
+          {
+            "count": 0,
+            "name": "Music and Art",
+            "id": "music-and-art"
+          },
+          {
+            "count": 0,
+            "name": "Business Essentials",
+            "id": "business-essentials"
+          },
+          {
+            "count": 0,
+            "name": "Bioinformatics",
+            "id": "bioinformatics"
+          },
+          {
+            "count": 0,
+            "name": "Nutrition",
+            "id": "nutrition"
+          },
+          {
+            "count": 0,
+            "name": "Physics and Astronomy",
+            "id": "physics-and-astronomy"
+          }
+        ]
+      },
+      "languages": {
+        "facetEntries": [
+          {
+            "count": 0,
+            "name": "Chinese (Traditional)",
+            "id": "zh-TW"
+          },
+          {
+            "count": 0,
+            "name": "Croatian",
+            "id": "hr"
+          },
+          {
+            "count": 0,
+            "name": "Tamil",
+            "id": "ta"
+          },
+          {
+            "count": 0,
+            "name": "Arabic",
+            "id": "ar"
+          },
+          {
+            "count": 0,
+            "name": "French",
+            "id": "fr"
+          },
+          {
+            "count": 0,
+            "name": "Bengali",
+            "id": "bn"
+          },
+          {
+            "count": 0,
+            "name": "Kinyarwanda",
+            "id": "rw"
+          },
+          {
+            "count": 0,
+            "name": "Avaric",
+            "id": "av"
+          },
+          {
+            "count": 0,
+            "name": "Ukrainian",
+            "id": "uk"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (European)",
+            "id": "pt-PT"
+          },
+          {
+            "count": 0,
+            "name": "Czech",
+            "id": "cs"
+          },
+          {
+            "count": 0,
+            "name": "Serbian",
+            "id": "sr"
+          },
+          {
+            "count": 0,
+            "name": "Chinese (Simplified)",
+            "id": "zh-CN"
+          },
+          {
+            "count": 0,
+            "name": "Greek",
+            "id": "el"
+          },
+          {
+            "count": 0,
+            "name": "Italian",
+            "id": "it"
+          },
+          {
+            "count": 0,
+            "name": "Catalan",
+            "id": "ca"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (Brazilian)",
+            "id": "pt-BR"
+          },
+          {
+            "count": 0,
+            "name": "Vietnamese",
+            "id": "vi"
+          },
+          {
+            "count": 0,
+            "name": "Assamese",
+            "id": "as"
+          },
+          {
+            "count": 0,
+            "name": "Tagalog",
+            "id": "tl"
+          },
+          {
+            "count": 0,
+            "name": "Dutch",
+            "id": "nl"
+          },
+          {
+            "count": 0,
+            "name": "Bulgarian",
+            "id": "bg"
+          },
+          {
+            "count": 0,
+            "name": "Korean",
+            "id": "ko"
+          },
+          {
+            "count": 0,
+            "name": "Macedonian (FYROM)",
+            "id": "mk"
+          },
+          {
+            "count": 0,
+            "name": "Estonian",
+            "id": "et"
+          },
+          {
+            "count": 0,
+            "name": "German",
+            "id": "de"
+          },
+          {
+            "count": 0,
+            "name": "Urdu",
+            "id": "ur"
+          },
+          {
+            "count": 0,
+            "name": "Russian",
+            "id": "ru"
+          },
+          {
+            "count": 0,
+            "name": "Thai",
+            "id": "th"
+          },
+          {
+            "count": 0,
+            "name": "Indonesian",
+            "id": "id"
+          },
+          {
+            "count": 0,
+            "name": "Albanian",
+            "id": "sq"
+          },
+          {
+            "count": 0,
+            "name": "Swedish",
+            "id": "sv"
+          },
+          {
+            "count": 0,
+            "name": "Turkish",
+            "id": "tr"
+          },
+          {
+            "count": 0,
+            "name": "Danish",
+            "id": "da"
+          },
+          {
+            "count": 3,
+            "name": "English",
+            "id": "en"
+          },
+          {
+            "count": 0,
+            "name": "Hebrew",
+            "id": "he"
+          },
+          {
+            "count": 0,
+            "name": "Kannada",
+            "id": "kn"
+          },
+          {
+            "count": 0,
+            "name": "Saraiki",
+            "id": "sk"
+          },
+          {
+            "count": 0,
+            "id": "az"
+          },
+          {
+            "count": 0,
+            "name": "Spanish",
+            "id": "es"
+          },
+          {
+            "count": 0,
+            "name": "Faroese",
+            "id": "fo"
+          },
+          {
+            "count": 0,
+            "name": "Hindi",
+            "id": "hi"
+          },
+          {
+            "count": 0,
+            "name": "Telugu",
+            "id": "te"
+          },
+          {
+            "count": 0,
+            "name": "Marathi (Marāṭhī)",
+            "id": "mr"
+          },
+          {
+            "count": 0,
+            "name": "Japanese",
+            "id": "ja"
+          },
+          {
+            "count": 0,
+            "name": "Romanian",
+            "id": "ro"
+          },
+          {
+            "count": 0,
+            "name": "Nepali",
+            "id": "ne"
+          },
+          {
+            "count": 0,
+            "name": "Lithuanian",
+            "id": "lt"
+          },
+          {
+            "count": 0,
+            "name": "Khmer",
+            "id": "km"
+          },
+          {
+            "count": 0,
+            "name": "Kazakh",
+            "id": "kk"
+          },
+          {
+            "count": 0,
+            "name": "Persian (Farsi)",
+            "id": "fa"
+          },
+          {
+            "count": 0,
+            "name": "Mongolian",
+            "id": "mn"
+          },
+          {
+            "count": 0,
+            "name": "Malay",
+            "id": "ms"
+          },
+          {
+            "count": 0,
+            "name": "Hungarian",
+            "id": "hu"
+          },
+          {
+            "count": 0,
+            "name": "Polish",
+            "id": "pl"
+          }
+        ]
+      },
+      "subtitleLanguages": {
+        "facetEntries": [
+          {
+            "count": 0,
+            "name": "Chinese (Traditional)",
+            "id": "zh-TW"
+          },
+          {
+            "count": 0,
+            "name": "Croatian",
+            "id": "hr"
+          },
+          {
+            "count": 0,
+            "name": "Tamil",
+            "id": "ta"
+          },
+          {
+            "count": 0,
+            "name": "Arabic",
+            "id": "ar"
+          },
+          {
+            "count": 0,
+            "name": "French",
+            "id": "fr"
+          },
+          {
+            "count": 0,
+            "name": "Bengali",
+            "id": "bn"
+          },
+          {
+            "count": 0,
+            "name": "Kinyarwanda",
+            "id": "rw"
+          },
+          {
+            "count": 0,
+            "name": "Avaric",
+            "id": "av"
+          },
+          {
+            "count": 0,
+            "name": "Ukrainian",
+            "id": "uk"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (European)",
+            "id": "pt-PT"
+          },
+          {
+            "count": 0,
+            "name": "Czech",
+            "id": "cs"
+          },
+          {
+            "count": 0,
+            "name": "Serbian",
+            "id": "sr"
+          },
+          {
+            "count": 0,
+            "name": "Chinese (Simplified)",
+            "id": "zh-CN"
+          },
+          {
+            "count": 0,
+            "name": "Greek",
+            "id": "el"
+          },
+          {
+            "count": 0,
+            "name": "Italian",
+            "id": "it"
+          },
+          {
+            "count": 0,
+            "name": "Catalan",
+            "id": "ca"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (Brazilian)",
+            "id": "pt-BR"
+          },
+          {
+            "count": 0,
+            "name": "Vietnamese",
+            "id": "vi"
+          },
+          {
+            "count": 0,
+            "name": "Assamese",
+            "id": "as"
+          },
+          {
+            "count": 0,
+            "name": "Tagalog",
+            "id": "tl"
+          },
+          {
+            "count": 0,
+            "name": "Dutch",
+            "id": "nl"
+          },
+          {
+            "count": 0,
+            "name": "Bulgarian",
+            "id": "bg"
+          },
+          {
+            "count": 0,
+            "name": "Korean",
+            "id": "ko"
+          },
+          {
+            "count": 0,
+            "name": "Macedonian (FYROM)",
+            "id": "mk"
+          },
+          {
+            "count": 0,
+            "name": "Estonian",
+            "id": "et"
+          },
+          {
+            "count": 0,
+            "name": "German",
+            "id": "de"
+          },
+          {
+            "count": 0,
+            "name": "Urdu",
+            "id": "ur"
+          },
+          {
+            "count": 0,
+            "name": "Russian",
+            "id": "ru"
+          },
+          {
+            "count": 0,
+            "name": "Thai",
+            "id": "th"
+          },
+          {
+            "count": 0,
+            "name": "Indonesian",
+            "id": "id"
+          },
+          {
+            "count": 0,
+            "name": "Albanian",
+            "id": "sq"
+          },
+          {
+            "count": 0,
+            "name": "Swedish",
+            "id": "sv"
+          },
+          {
+            "count": 0,
+            "name": "Turkish",
+            "id": "tr"
+          },
+          {
+            "count": 0,
+            "name": "Danish",
+            "id": "da"
+          },
+          {
+            "count": 0,
+            "name": "English",
+            "id": "en"
+          },
+          {
+            "count": 0,
+            "name": "Hebrew",
+            "id": "he"
+          },
+          {
+            "count": 0,
+            "name": "Kannada",
+            "id": "kn"
+          },
+          {
+            "count": 0,
+            "name": "Saraiki",
+            "id": "sk"
+          },
+          {
+            "count": 0,
+            "id": "az"
+          },
+          {
+            "count": 0,
+            "name": "Spanish",
+            "id": "es"
+          },
+          {
+            "count": 0,
+            "name": "Faroese",
+            "id": "fo"
+          },
+          {
+            "count": 0,
+            "name": "Hindi",
+            "id": "hi"
+          },
+          {
+            "count": 0,
+            "name": "Telugu",
+            "id": "te"
+          },
+          {
+            "count": 0,
+            "name": "Marathi (Marāṭhī)",
+            "id": "mr"
+          },
+          {
+            "count": 0,
+            "name": "Japanese",
+            "id": "ja"
+          },
+          {
+            "count": 0,
+            "name": "Romanian",
+            "id": "ro"
+          },
+          {
+            "count": 0,
+            "name": "Nepali",
+            "id": "ne"
+          },
+          {
+            "count": 0,
+            "name": "Lithuanian",
+            "id": "lt"
+          },
+          {
+            "count": 0,
+            "name": "Khmer",
+            "id": "km"
+          },
+          {
+            "count": 0,
+            "name": "Kazakh",
+            "id": "kk"
+          },
+          {
+            "count": 0,
+            "name": "Persian (Farsi)",
+            "id": "fa"
+          },
+          {
+            "count": 0,
+            "name": "Mongolian",
+            "id": "mn"
+          },
+          {
+            "count": 0,
+            "name": "Malay",
+            "id": "ms"
+          },
+          {
+            "count": 0,
+            "name": "Hungarian",
+            "id": "hu"
+          },
+          {
+            "count": 0,
+            "name": "Polish",
+            "id": "pl"
+          }
+        ]
+      },
+      "domains": {
+        "facetEntries": [
+          {
+            "count": 0,
+            "name": "Personal Development",
+            "id": "personal-development"
+          },
+          {
+            "count": 1,
+            "name": "Business",
+            "id": "business"
+          },
+          {
+            "count": 0,
+            "name": "Math and Logic",
+            "id": "math-and-logic"
+          },
+          {
+            "count": 2,
+            "name": "Social Sciences",
+            "id": "social-sciences"
+          },
+          {
+            "count": 1,
+            "name": "Life Sciences",
+            "id": "life-sciences"
+          },
+          {
+            "count": 0,
+            "name": "Data Science",
+            "id": "data-science"
+          },
+          {
+            "count": 0,
+            "name": "Physical Science and Engineering",
+            "id": "physical-science-and-engineering"
+          },
+          {
+            "count": 1,
+            "name": "Language Learning",
+            "id": "language-learning"
+          },
+          {
+            "count": 1,
+            "name": "Arts and Humanities",
+            "id": "arts-and-humanities"
+          },
+          {
+            "count": 0,
+            "name": "Computer Science",
+            "id": "computer-science"
+          }
+        ]
+      },
+      "availability": {
+        "facetEntries": [
+          {
+            "count": 1,
+            "name": "Pre-Enroll",
+            "id": "preEnroll"
+          },
+          {
+            "count": 0,
+            "name": "1-2 months",
+            "id": "oneToTwoMonths"
+          },
+          {
+            "count": 0,
+            "name": "2-3 months",
+            "id": "twoToThreeMonths"
+          },
+          {
+            "count": 0,
+            "name": "3+ months",
+            "id": "moreThanThreeMonths"
+          },
+          {
+            "count": 2,
+            "name": "This Month",
+            "id": "withinOneMonth"
+          }
+        ]
+      },
+      "productType": {
+        "facetEntries": [
+          {
+            "count": 3,
+            "name": "Course",
+            "id": "COURSE"
+          },
+          {
+            "count": 0,
+            "name": "Specialization",
+            "id": "SPECIALIZATION"
+          }
+        ]
+      },
+      "primaryLanguages": {
+        "facetEntries": [
+          {
+            "count": 0,
+            "name": "Chinese (Traditional)",
+            "id": "zh-TW"
+          },
+          {
+            "count": 0,
+            "name": "Arabic",
+            "id": "ar"
+          },
+          {
+            "count": 0,
+            "name": "French",
+            "id": "fr"
+          },
+          {
+            "count": 0,
+            "name": "Ukrainian",
+            "id": "uk"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (European)",
+            "id": "pt-PT"
+          },
+          {
+            "count": 0,
+            "name": "Chinese (Simplified)",
+            "id": "zh-CN"
+          },
+          {
+            "count": 0,
+            "name": "Italian",
+            "id": "it"
+          },
+          {
+            "count": 0,
+            "name": "Catalan",
+            "id": "ca"
+          },
+          {
+            "count": 0,
+            "name": "Portuguese (Brazilian)",
+            "id": "pt-BR"
+          },
+          {
+            "count": 0,
+            "name": "Dutch",
+            "id": "nl"
+          },
+          {
+            "count": 0,
+            "name": "German",
+            "id": "de"
+          },
+          {
+            "count": 0,
+            "name": "Russian",
+            "id": "ru"
+          },
+          {
+            "count": 0,
+            "name": "Albanian",
+            "id": "sq"
+          },
+          {
+            "count": 0,
+            "name": "Swedish",
+            "id": "sv"
+          },
+          {
+            "count": 0,
+            "name": "Turkish",
+            "id": "tr"
+          },
+          {
+            "count": 3,
+            "name": "English",
+            "id": "en"
+          },
+          {
+            "count": 0,
+            "name": "Hebrew",
+            "id": "he"
+          },
+          {
+            "count": 0,
+            "name": "Spanish",
+            "id": "es"
+          }
+        ]
+      }
+    }
+  },
+  "linked": {
+    "courses.v1": [
+      {
+        "courseType": "v2.ondemand",
+        "name": "Global Diplomacy – Diplomacy in the Modern World",
+        "id": "trgWdYiKEeWfngrMqWa91Q",
+        "slug": "global-diplomacy"
+      },
+      {
+        "courseType": "v2.ondemand",
+        "id": "X1gEFr4LEeaqug5_d2-DwA",
+        "slug": "lexical-semantic-typology",
+        "name": "Towards language universals through lexical semantics: introduction to lexical and semantic typology"
+      },
+      {
+        "courseType": "v2.ondemand",
+        "id": "hEMZ5zJuEeaGtRI0HQleow",
+        "slug": "hi-five-clinical",
+        "name": "HI-FIVE: Health Informatics For Innovation, Value & Enrichment (Clinical Perspective)"
+      }
+    ],
+    "onDemandSpecializations.v1": []
+  }
+}

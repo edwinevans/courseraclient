@@ -16,6 +16,9 @@ import cz.msebera.android.httpclient.Header;
 public class SearchActivity extends AppCompatActivity {
     private static final String TAG = "SearchActivity";
 
+    // Limit to request with each call. The total number of courses plus
+    // specializations may be more
+    private static final int LIMIT = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void handleSearchRequested(String query) {
         Log.d(TAG, "Search for " + query);
-        CourseraApiClient.getCourses(getApplicationContext(), query, new JsonHttpResponseHandler() {
+        CourseraApiClient.getCourses(getApplicationContext(), query, 0, LIMIT, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(TAG, "Search mResponse: " + response);

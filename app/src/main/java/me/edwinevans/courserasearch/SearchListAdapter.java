@@ -27,25 +27,27 @@ class SearchListAdapter extends BaseAdapter {
         this.mResponse = response;
         try {
             JSONObject linked = response.getJSONObject("linked");
-            mCourses = linked.getJSONArray("mCourses.v1");
+            mCourses = linked.getJSONArray("courses.v1");
             mSpecializations = linked.getJSONArray("onDemandSpecializations.v1");
-            createPartnersMap();
+            updatePartnersMap(linked);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void createPartnersMap() {
+    private void updatePartnersMap(JSONObject linked) {
         mPartnerIdToName = new HashMap();
         try {
-            JSONArray partners = mResponse.getJSONArray("partners.v1");
-            for (int i = 0; i < partners.length(); i++) {
-                JSONObject partner = partners.getJSONObject(i);
-                String name = partner.getString("name");
-                Integer id = partner.getInt("id");
-                mPartnerIdToName.put(id, name);
+            JSONArray partners = linked.optJSONArray("partners.v1");
+            if (partners != null) {
+                for (int i = 0; i < partners.length(); i++) {
+                    JSONObject partner = partners.getJSONObject(i);
+                    String name = partner.getString("name");
+                    Integer id = partner.getInt("id");
+                    mPartnerIdToName.put(id, name);
+                }
             }
-        } catch (JSONException e) {
+        } catch(JSONException e){
             e.printStackTrace();
         }
     }
@@ -112,14 +114,11 @@ class SearchListAdapter extends BaseAdapter {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            textViewUniversityName.setText("University name, todo");
             JSONArray courses = jsonObject.optJSONArray("courseIds");
-            if (courses == null) {
-                textViewNumCourses.setVisibility(View.GONE);
-            }
-            else {
+            textViewNumCourses.setVisibility(View.GONE);
+            if (courses != null && courses.length() > 0) {
                 textViewNumCourses.setVisibility(View.VISIBLE);
-                textViewNumCourses.setText(String.valueOf(courses.length()) + " mCourses");
+                textViewNumCourses.setText(String.valueOf(courses.length()) + " Courses");
             }
         } catch (JSONException e) {
             e.printStackTrace();
