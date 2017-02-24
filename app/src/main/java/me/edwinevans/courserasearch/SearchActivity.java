@@ -19,14 +19,15 @@ public class SearchActivity extends AppCompatActivity {
 
     // Limit to request with each call. The total number of courses plus
     // specializations may be more
-    private static final int LIMIT = 10;
+    private static final int LIMIT_INITIAL = 15;
+    private static final int LIMIT_INCREMENTAL = 10;
 
     private EndlessRecyclerViewScrollListener mScrollListener;
     private String mSearchString;
     private int mPagingNext = 0;
     private LinearLayoutManager mLinearLayoutManager;
     private RecyclerView mRecyclerView;
-
+    private SearchListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,9 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSearchString = searchEntry.getText().toString();
                 mScrollListener.resetState();
+                if (mAdapter != null) {
+                    mAdapter.clearData();
+                }
                 searchRequest(0);
             }
         });
@@ -68,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
     private void searchRequest(final int pagingNext) {
         Log.d(TAG, "Request a search. Search string: " + mSearchString + ", Starting from: " + pagingNext);
         CourseraApiClient.getCourses(getApplicationContext(), mSearchString, pagingNext,
-                (pagingNext == 0 ? LIMIT : 2), // testing
+                (pagingNext == 0 ? LIMIT_INITIAL : LIMIT_INCREMENTAL),
                 new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -79,15 +83,14 @@ public class SearchActivity extends AppCompatActivity {
                     Log.d(TAG, "  Total: " + paging.optString("total") + ", Next: " + mPagingNext);
                 }
                 if (pagingNext == 0) {
-                    final SearchListAdapter adapter = new SearchListAdapter(
+                    mAdapter = new SearchListAdapter(
                             getApplicationContext(), response, mRecyclerView);
-                    mRecyclerView.setAdapter(adapter);
+                    mRecyclerView.setAdapter(mAdapter);
                     mRecyclerView.setLayoutManager(mLinearLayoutManager);
                 }
                 else {
-                    final SearchListAdapter adapter = (SearchListAdapter)mRecyclerView.getAdapter();
-                    adapter.appendNewResponse(response);
-                    adapter.notifyDataSetChanged(); // would be good to make more granular
+                    mAdapter.appendNewResponse(response);
+                    mAdapter.notifyDataSetChanged(); // would be good to make more granular
                 }
             }
 

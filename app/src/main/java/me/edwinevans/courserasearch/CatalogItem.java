@@ -12,10 +12,12 @@ import java.util.Map;
 // We could break into a class hierarchy if helpful. This is simple for now.
 class CatalogItem {
     static final String EXTRA_KEY = "CATALOG_ITEM";
+    private static final String BUNDLE_KEY_ID = "ID";
     private static final String BUNDLE_KEY_LOGO = "LOGO";
     private static final String BUNDLE_KEY_NAME = "NAME";
     private static final String BUNDLE_KEY_UNIVERSITY_NAME = "UNIVERSITY_NAME";
     private static final String BUNDLE_KEY_NUM_COURSES = "NUM_COURSES";
+    private String mId;
     private String mLogoUrl;
     private String mName;
     private String mUniversityName;
@@ -25,6 +27,7 @@ class CatalogItem {
     }
 
     CatalogItem(JSONObject jsonObject, Map<Integer, String> partnerIdToName) {
+        mId = jsonObject.optString("id");
         mLogoUrl = jsonObject.optString("logo");
         mName = jsonObject.optString("name");
 
@@ -43,6 +46,7 @@ class CatalogItem {
 
     Bundle toBundle() {
         Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_KEY_ID, getId());
         bundle.putString(BUNDLE_KEY_LOGO, getLogoUrl());
         bundle.putString(BUNDLE_KEY_NAME, getName());
         bundle.putString(BUNDLE_KEY_UNIVERSITY_NAME, getUniversityName());
@@ -52,6 +56,7 @@ class CatalogItem {
 
     static CatalogItem fromBundle(Bundle bundle) {
         CatalogItem catalogItem = new CatalogItem();
+        catalogItem.mId = bundle.getString(BUNDLE_KEY_ID);
         catalogItem.mLogoUrl = bundle.getString(BUNDLE_KEY_LOGO);
         catalogItem.mName = bundle.getString(BUNDLE_KEY_NAME);
         catalogItem.mUniversityName = bundle.getString(BUNDLE_KEY_UNIVERSITY_NAME);
@@ -59,6 +64,7 @@ class CatalogItem {
         return catalogItem;
     }
 
+    String getId() { return mId; }
     String getName() { return mName; }
     String getUniversityName() { return mUniversityName; }
     int getNumCourses() { return mNumCourses; }

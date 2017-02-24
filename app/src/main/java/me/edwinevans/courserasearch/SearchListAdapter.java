@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -68,6 +67,10 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearData() {
+        mCatalogItems.clear();
     }
 
     private void addToCatalogItems(JSONArray items) {
