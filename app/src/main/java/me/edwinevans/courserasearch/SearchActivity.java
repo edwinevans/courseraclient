@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -40,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                loadNextDataFromApi(page);
+                loadNextDataFromApi();
             }
         };
         // Adds the scroll listener to RecyclerView
@@ -60,8 +59,8 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void loadNextDataFromApi(int page) {
-        // TODO! if more data
+    private void loadNextDataFromApi() {
+        // TODO! only do if more data is available
         Log.d(TAG, "Request more data");
         searchRequest(mPagingNext);
     }
@@ -88,8 +87,7 @@ public class SearchActivity extends AppCompatActivity {
                 else {
                     final SearchListAdapter adapter = (SearchListAdapter)mRecyclerView.getAdapter();
                     adapter.appendNewResponse(response);
-                    //mScrollListener.resetState();
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged(); // would be good to make more granular
                 }
             }
 

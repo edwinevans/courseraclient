@@ -1,7 +1,6 @@
 package me.edwinevans.courserasearch;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -11,7 +10,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CourseraApiClient {
+class CourseraApiClient {
     private static final String TAG = "CourseraApiClient";
     private static final String CATALOG_URL = "https://www.coursera.org/api/catalogResults.v2?";
     private static final String FIELDS =
@@ -20,7 +19,7 @@ public class CourseraApiClient {
     private static final String INCLUDES =
             "courseId,onDemandSpecializationId,courses.v1(partnerIds)";
 
-    private static AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient client = new AsyncHttpClient();
 
     public static void getCourses(final Context context, String searchString,
                                   int start, int limit,

@@ -1,6 +1,6 @@
 package me.edwinevans.courserasearch;
 
-public class Utility {
+class Utility {
     public static boolean isMockMode() {
         return false;
     }

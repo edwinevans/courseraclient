@@ -12,7 +12,6 @@ class CatalogItemActivity : AppCompatActivity() {
 
         val bundle = intent.getBundleExtra(CatalogItem.EXTRA_KEY)
         val catalogItem : CatalogItem = CatalogItem.fromBundle(bundle)
-
         setTextValue(R.id.name, catalogItem.name)
         setTextValue(R.id.university_name, catalogItem.universityName)
         setTextValue(R.id.number_of_courses, catalogItem.getNumCoursesDisplayString(application))
@@ -20,6 +19,6 @@ class CatalogItemActivity : AppCompatActivity() {
 
     private fun setTextValue(resourceId: Int, value: String?) {
         val tvName : TextView = findViewById(resourceId) as TextView
-        tvName.setText(value)
+        tvName.text = value
     }
 }

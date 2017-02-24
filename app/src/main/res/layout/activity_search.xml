@@ -28,7 +28,8 @@
         android:layout_alignParentTop="true"
         android:background="@color/white"
         android:layout_toStartOf="@+id/search_button"
-        android:layout_toLeftOf="@+id/search_button" />
+        android:layout_toLeftOf="@+id/search_button"
+        android:hint="@string/search_catalog"/>
 
 
     <android.support.v7.widget.RecyclerView
