@@ -2,13 +2,17 @@ package me.edwinevans.courserasearch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +33,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         final TextView mTextViewName;
         final TextView mTextViewUniversityName;
         final TextView mTextViewNumCourses;
-        //ImageView imgViewIcon;
+        final ImageView mLogo;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -37,7 +41,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
             mTextViewName = (TextView) itemView.findViewById(R.id.name);
             mTextViewUniversityName = (TextView)itemView.findViewById(R.id.university_name);
             mTextViewNumCourses = (TextView) itemView.findViewById(R.id.number_of_courses);
-            //imgViewIcon = (ImageView) itemView.findViewById(R.id.logo);
+            mLogo = (ImageView) itemView.findViewById(R.id.logo);
         }
 
         @Override
@@ -94,7 +98,6 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         }
     }
 
-
     private void updatePartnersMap(JSONObject linked) {
         try {
             JSONArray partners = linked.optJSONArray("partners.v1");
@@ -137,6 +140,9 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
             holder.mTextViewNumCourses.setVisibility(View.VISIBLE);
             holder.mTextViewNumCourses.setText(catalogItem.getNumCoursesDisplayString(mContext));
         }
+
+        Uri uri = Uri.parse(catalogItem.getLogoUrl());
+        Picasso.with(mContext).load(uri).into(holder.mLogo);
     }
 
     @Override

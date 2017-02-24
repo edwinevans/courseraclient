@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="8dp"
     android:background="@color/colorPrimary"
-    tools:context="me.edwinevans.courserasearch.SearchActivity">
+    tools:context="me.edwinevans.courserasearch.MainActivity">
 
     <Button
         android:id="@+id/search_button"
@@ -17,6 +17,7 @@
         android:layout_height="60sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/search"
         />
 

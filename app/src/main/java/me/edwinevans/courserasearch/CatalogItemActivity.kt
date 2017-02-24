@@ -1,3 +1,5 @@
+// See MainActivity for notes
+
 package me.edwinevans.courserasearch
 
 import android.support.v7.app.AppCompatActivity
@@ -8,9 +10,11 @@ import android.widget.TextView
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.squareup.picasso.Picasso
 import cz.msebera.android.httpclient.Header
-import org.json.JSONArray
 import org.json.JSONObject
 
+/**
+ * Display details of a Course or Specialization
+ */
 class CatalogItemActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +32,13 @@ class CatalogItemActivity : AppCompatActivity() {
                 val element = response?.optJSONArray("elements")?.get(0) as JSONObject?
                 val description = element?.optString("description")
                 setTextValue(R.id.description, description)
-                val logo = element?.optString("logo")
+                val logo : String?
+                if (catalogItem.isSpecialization) {
+                    logo = element?.optString("logo")
+                }
+                else {
+                    logo = element?.optString("photoUrl")
+                }
                 if (!TextUtils.isEmpty(logo)) {
                     val imageView = findViewById(R.id.logo) as ImageView
                     Picasso.with(application).load(logo).into(imageView);
@@ -36,7 +46,7 @@ class CatalogItemActivity : AppCompatActivity() {
             }
         }
         
-        if (catalogItem.numCourses > 0) {
+        if (catalogItem.isSpecialization) {
             CourseraApiClient.getSpecialization(application, catalogItem.id, handler)
         }
         else {

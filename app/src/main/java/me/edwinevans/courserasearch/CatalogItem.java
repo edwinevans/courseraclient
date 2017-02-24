@@ -1,3 +1,5 @@
+// See MainActivity for notes
+
 package me.edwinevans.courserasearch;
 
 import android.content.Context;
@@ -8,7 +10,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 // This can be used for a course or specialization and whether it is a specialization or
-// not can be determined by if it has any courses contained in it.
+// not can be determined based on if it has any courses contained in it.
 // We could break into a class hierarchy if helpful. This is simple for now.
 class CatalogItem {
     static final String EXTRA_KEY = "CATALOG_ITEM";
@@ -33,9 +35,10 @@ class CatalogItem {
 
         JSONArray partnerIds = jsonObject.optJSONArray("partnerIds");
         if (partnerIds != null && partnerIds.length() == 1) {
-            // Assume there is only one item and it is the partner
+            // I'm assuming there is only one item and it is the partner
             Integer id = partnerIds.optInt(0);
             mUniversityName = partnerIdToName.get(id);
+            mLogoUrl = jsonObject.optString("logo");
         }
 
         JSONArray courses = jsonObject.optJSONArray("courseIds");
@@ -68,6 +71,7 @@ class CatalogItem {
     String getName() { return mName; }
     String getUniversityName() { return mUniversityName; }
     int getNumCourses() { return mNumCourses; }
+    boolean isSpecialization() { return mNumCourses > 0; }
     String getLogoUrl() { return mLogoUrl; }
 
     String getNumCoursesDisplayString(Context context) {

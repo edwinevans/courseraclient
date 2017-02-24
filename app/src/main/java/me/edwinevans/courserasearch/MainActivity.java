@@ -1,3 +1,17 @@
+/**************
+
+ NOTES:
+ 1. Uses EndlessRecyclerViewScrollListener (https://gist.github.com/nesquena/d09dc68ff07e845cc622)
+    to implement infinite scrolling with additional calls to the catalog API to fetch more data.
+ 2. Some of the code is written in Kotlin. If I was doing this for real I would probably write it
+    all in Java or all in Kotlin.
+ 3. I think everything is working except there are no images showing for courses because the
+    catalog API is not returning them. Images work in list for specializations and in detail
+    page for both.
+ 4. There are a few more things that we can discuss.
+
+ **************/
+
 package me.edwinevans.courserasearch;
 
 import android.support.v7.app.AppCompatActivity;
@@ -7,17 +21,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
 import com.loopj.android.http.JsonHttpResponseHandler;
-
 import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
 
-public class SearchActivity extends AppCompatActivity {
-    private static final String TAG = "SearchActivity";
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
-    // Limit to request with each call. The total number of courses plus
+    // Limit to request with each API call. The total number of courses plus
     // specializations may be more
     private static final int LIMIT_INITIAL = 15;
     private static final int LIMIT_INCREMENTAL = 10;
@@ -34,13 +45,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mLinearLayoutManager = new LinearLayoutManager(SearchActivity.this);
+        mLinearLayoutManager = new LinearLayoutManager(MainActivity.this);
         mScrollListener = new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-                loadNextDataFromApi();
+                loadMoreDataFromApi();
             }
         };
         // Adds the scroll listener to RecyclerView
@@ -49,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
 
         View searchButton = findViewById(R.id.search_button);
         final TextView searchEntry = (TextView) findViewById(R.id.search_entry);
-        searchEntry.setText("machine learning"); // TESTING
+        searchEntry.setText("machine learning"); // for testing
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +72,8 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void loadNextDataFromApi() {
-        // TODO! only do if more data is available
+    private void loadMoreDataFromApi() {
+        // Should really only do this if we know more data is available
         Log.d(TAG, "Request more data");
         searchRequest(mPagingNext);
     }
@@ -97,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable e,
                                   JSONObject response) {
-                Log.i(TAG, "Search call failed, statusCode: " + statusCode +
+                Log.i(TAG, "Catalog search call failed, statusCode: " + statusCode +
                         ", mResponse: " + response);
             }
         });

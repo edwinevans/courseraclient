@@ -1,12 +1,13 @@
 package me.edwinevans.courserasearch;
 
-// Thanks https://gist.github.com/nesquena/d09dc68ff07e845cc622
-
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+/**
+ * Thanks https://gist.github.com/nesquena/d09dc68ff07e845cc622
+  */
 abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
     // The minimum amount of items to have below your current scroll position
     // before loading more.
