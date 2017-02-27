@@ -28,6 +28,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
     private Map<Integer, String> mMapPartnerIdToName = new HashMap<>();
     private final Context mContext;
     private final RecyclerView mRecyclerView;
+    private final RowOnClickListener mRowOnClickListener = new RowOnClickListener();
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView mTextViewName;
@@ -73,7 +74,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         }
     }
 
-    public void clearData() {
+    void clearData() {
         mCatalogItems.clear();
     }
 
@@ -89,10 +90,8 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         try {
             JSONObject linked = response.getJSONObject("linked");
             updatePartnersMap(linked);
-            JSONArray courses = linked.getJSONArray("courses.v1");
-            addToCatalogItems(courses);
-            JSONArray specializations = linked.getJSONArray("onDemandSpecializations.v1");
-            addToCatalogItems(specializations);
+            addToCatalogItems(linked.getJSONArray("courses.v1"));
+            addToCatalogItems(linked.getJSONArray("onDemandSpecializations.v1"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -120,7 +119,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         LayoutInflater inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.search_list_item, parent, false);
-        rowView.setOnClickListener(new MyOnClickListener()); // TODO: make variable
+        rowView.setOnClickListener(mRowOnClickListener);
         return new ViewHolder(rowView);
     }
 
@@ -150,7 +149,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         return mCatalogItems.size();
     }
 
-    private class MyOnClickListener implements View.OnClickListener {
+    private class RowOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             int position =  mRecyclerView.getChildAdapterPosition(v);

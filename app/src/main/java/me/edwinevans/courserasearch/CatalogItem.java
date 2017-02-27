@@ -9,9 +9,9 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-// This can be used for a course or specialization and whether it is a specialization or
-// not can be determined based on if it has any courses contained in it.
-// We could break into a class hierarchy if helpful. This is simple for now.
+// This Activity can be used to display a course or specialization.
+// I'm assuming an item is a specialization if and only if it contains courses.
+// We could break this into a hierarchy of classes if helpful. This is simple for now.
 class CatalogItem {
     static final String EXTRA_KEY = "CATALOG_ITEM";
     private static final String BUNDLE_KEY_ID = "ID";
@@ -38,12 +38,15 @@ class CatalogItem {
             // I'm assuming there is only one item and it is the partner
             Integer id = partnerIds.optInt(0);
             mUniversityName = partnerIdToName.get(id);
-            mLogoUrl = jsonObject.optString("logo");
         }
 
         JSONArray courses = jsonObject.optJSONArray("courseIds");
         if (courses != null) {
             mNumCourses = courses.length();
+            mLogoUrl = jsonObject.optString("logo");
+        }
+        else {
+            mLogoUrl = jsonObject.optString("photoUrl");
         }
     }
 

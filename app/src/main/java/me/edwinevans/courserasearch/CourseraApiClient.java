@@ -26,7 +26,7 @@ class CourseraApiClient {
             "courseId,onDemandSpecializationId,courses.v1(partnerIds)";
 
 
-    private static final AsyncHttpClient client = new AsyncHttpClient();
+    private static final AsyncHttpClient mClient = new AsyncHttpClient();
 
     public static void getCourses(final Context context, String searchString,
                                   int start, int limit,
@@ -42,6 +42,7 @@ class CourseraApiClient {
             responseHandler.onSuccess(200, null, jsonObject);
         }
         else {
+            // May be good to first check if we have an internet connections
             RequestParams params = new RequestParams();
             params.put("q", "search");
             params.put("query", searchString);
@@ -49,12 +50,9 @@ class CourseraApiClient {
             params.put("limit", limit);
             params.add("fields", CATALOG_FIELDS);
             params.add("includes", CATALOG_INCLUDES);
-
-            // Below line doesn't work. Perhaps start/limit needs to combined into query param
-            // client.get(CATALOG_URL, params, responseHandler);
-            String url = CATALOG_URL + params.toString(); // since above doesn't work
+            String url = CATALOG_URL + params.toString();
             Log.d(TAG, "GET " + url);
-            client.get(url, responseHandler);
+            mClient.get(url, responseHandler);
         }
     }
 
@@ -63,7 +61,7 @@ class CourseraApiClient {
         String url = COURSE_URL + id;
         RequestParams params = new RequestParams();
         params.add("fields", COURSE_FIELDS);
-        client.get(url, params, responseHandler);
+        mClient.get(url, params, responseHandler);
     }
 
     public static void getSpecialization(final Context context, String id,
@@ -71,6 +69,6 @@ class CourseraApiClient {
         String url = SPECIALIZATION_URL + id;
         RequestParams params = new RequestParams();
         params.add("fields", SPECIALIZATION_FIELDS);
-        client.get(url, params, responseHandler);
+        mClient.get(url, params, responseHandler);
     }
 }
