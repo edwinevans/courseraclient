@@ -3,9 +3,7 @@
  NOTES:
  1. Uses EndlessRecyclerViewScrollListener (https://gist.github.com/nesquena/d09dc68ff07e845cc622)
     to implement fetching additional catalog data when user scrolls down
- 2. Some of the code is written in Kotlin. If I was doing this for real I would probably write it
-    all in Java or all in Kotlin.
- 3. I'm assuming that the partnerIds is an array with a single element that can be used to look up
+ 2. I'm assuming that the partnerIds is an array with a single element that can be used to look up
     the school name and that an item is a specialization if and only if it contains courseIds.
 
  **************/

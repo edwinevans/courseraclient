@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
+    // Contains list of items which are either Courses or Specializations
     private static List<CatalogItem> mCatalogItems = new ArrayList<>();
+
     private Map<Integer, String> mMapPartnerIdToName = new HashMap<>();
     private final Context mContext;
     private final RecyclerView mRecyclerView;
@@ -38,7 +40,6 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
 
         ViewHolder(View itemView) {
             super(itemView);
-
             mTextViewName = (TextView) itemView.findViewById(R.id.name);
             mTextViewUniversityName = (TextView)itemView.findViewById(R.id.university_name);
             mTextViewNumCourses = (TextView) itemView.findViewById(R.id.number_of_courses);
@@ -61,17 +62,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
         super();
         mContext = context;
         mRecyclerView = recyclerView;
-
-        try {
-            JSONObject linked = response.getJSONObject("linked");
-            updatePartnersMap(linked);
-            JSONArray courses = linked.getJSONArray("courses.v1");
-            addToCatalogItems(courses);
-            JSONArray specializations = linked.getJSONArray("onDemandSpecializations.v1");
-            addToCatalogItems(specializations);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        appendNewResponse(response);
     }
 
     void clearData() {
@@ -155,8 +146,7 @@ class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolde
             int position =  mRecyclerView.getChildAdapterPosition(v);
             CatalogItem item = mCatalogItems.get(position);
             Bundle bundle = item.toBundle();
-            Intent intent = new Intent();
-            intent.setClass(mContext, CatalogItemActivity.class);
+            Intent intent = new Intent(mContext, CatalogItemActivity.class);
             intent.putExtra(CatalogItem.EXTRA_KEY, bundle);
             mContext.startActivity(intent);
         }
